@@ -1,0 +1,48 @@
+<div
+  class="is-flex is-flex-wrap-wrap is-justify-content-space-around is-align-items-center"
+>
+  <section class="hero">
+    <div class="hero-body">
+      <h1 class="title">Les todos</h1>
+    </div>
+  </section>
+  <button (click)="goBack()" class="button is-success">Retour</button>
+</div>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">Todos</h1>
+      <h2 class="subtitle">
+        Les todos
+      </h2>
+      <div class="is-flex is-flex-wrap-wrap is-justify-content-space-around">
+
+        <article
+        style="width: 400px"
+        *ngFor="let todo of todos; let i = index;"
+        [class.is-success]="todo.completed"
+        class="panel"
+        [class.is-danger]="!todo.completed">
+          <p class="panel-heading">
+            TODO {{ i + 1 }}
+          </p>
+
+          <div class="panel-block">
+            {{ todo.title }}
+          </div>
+          <div  class="panel-block is-justify-content-flex-end">
+            <span>
+              <button
+              style="width:150px"
+              class="button"
+              [class.is-success]="todo.completed"
+              [class.is-danger]="!todo.completed"
+              (click)="toggleTodoStatus(todo)">
+              {{ todo.completed ? 'FAIT' : 'A FAIRE' }}
+            </button>
+            </span>
+          </div>
+        </article>
+      </div>
+  </div>
+</section>

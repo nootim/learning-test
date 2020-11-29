@@ -1,0 +1,40 @@
+<section class="hero">
+  <div class="hero-body">
+    <h1 class="title">Angular</h1>
+    <h2>Les tests</h2>
+  </div>
+</section>
+
+<div class="is-flex is-flex-wrap-wrap is-justify-content-space-around">
+  <ng-container *ngFor="let user of users">
+    <div
+      style="margin: 15px; width: 30%; padding: 15px"
+      class="card"
+      *ngIf="!falseDeleteId.includes(user.id)"
+    >
+      <header class="card-header">
+        <div class="media-left">
+          <figure class="image is-128x128">
+            <img class="is-rounded" src="{{ user.avatar }}" />
+          </figure>
+        </div>
+        <p class="card-header-title is-centered">{{ user.name }}</p>
+      </header>
+      <div class="card-content">
+        <p>
+          Société : {{ user.company.name }} - {{ user.company.catchPhrase }}
+        </p>
+        <p>Site web : {{ user.website }}</p>
+      </div>
+      <div class="card-footer is-justify-content-center">
+        <app-user-footer-card
+          [userId]="user.id"
+          (deleteClicked)="deleteUser($event)"
+          (userInfoClicked)="goToUserDetails($event)"
+          (todoClicked)="goToTodo($event)"
+        >
+        </app-user-footer-card>
+      </div>
+    </div>
+  </ng-container>
+</div>

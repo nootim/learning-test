@@ -38,7 +38,7 @@ export class PostService {
    * @param userId id of a user
    */
   public getPostsByUserId(userId: number): Observable<Post[]> {
-    return this.http.get<Post[]>(`${this.postsUrl}/${userId}`);
+    return this.http.get<Post[]>(`${this.postsUrl}?userId=${userId}`);
   }
 
   /**

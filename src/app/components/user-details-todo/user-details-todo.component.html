@@ -1,0 +1,15 @@
+<article class="panel is-primary">
+  <p class="panel-heading">Les todos</p>
+  <div *ngFor="let todo of todos" class="panel-block is-justify-content-space-between">
+    <div class="nootim-overflow">{{ todo.title }}</div>
+    <div>
+      <button
+      (click)="onTodoUpdateStatus(todo)"
+      class="button"
+      [class.is-success]="todo.completed"
+      [class.is-danger]="!todo.completed"
+      style="width: 30px;height: 30px; border-radius: 50%">
+      </button>
+    </div>
+  </div>
+</article>

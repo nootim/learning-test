@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { User } from '../model/user.model';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,22 @@ export class UserService {
    */
   private readonly usersUrl = `${environment.apiUrl}/users`;
 
+  /**
+   * Url of Pictures for avatars
+   */
+  private readonly avatars = [
+    'https://i.pravatar.cc/100?img=26',
+    'https://i.pravatar.cc/100?img=7',
+    'https://i.pravatar.cc/100?img=5',
+    'https://i.pravatar.cc/100?img=46',
+    'https://i.pravatar.cc/100?img=9',
+    'https://i.pravatar.cc/100?img=21',
+    'https://i.pravatar.cc/100?img=17',
+    'https://i.pravatar.cc/100?img=4',
+    'https://i.pravatar.cc/100?img=25',
+    'https://i.pravatar.cc/100?img=10',
+  ];
+
   constructor(private http: HttpClient) {
   }
 
@@ -21,7 +38,15 @@ export class UserService {
    * get all users
    */
   public getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.usersUrl}`);
+    return this.http.get<User[]>(`${this.usersUrl}`)
+      .pipe(
+        map(users => {
+          users.forEach((user, index) => {
+            user.avatar = this.avatars[index];
+          });
+          return users;
+        }),
+      );
   }
 
   /**
@@ -29,7 +54,13 @@ export class UserService {
    * @param id id of one user
    */
   public getUserById(id: number): Observable<User> {
-    return this.http.get<User>(`${this.usersUrl}/${id}`);
+    return this.http.get<User>(`${this.usersUrl}/${id}`).pipe(
+      map((user: User) => {
+        const index = user.id - 1;
+        user.avatar = this.avatars[index];
+        return user;
+      }
+    ));
   }
 
   /**
@@ -44,7 +75,7 @@ export class UserService {
    * delete a user by his id
    * @param id id of a user
    */
-  public deleteUser(id: number): Observable<User>{
+  public deleteUser(id: number): Observable<User> {
     return this.http.delete<User>(`${this.usersUrl}/${id}`);
   }
 }
