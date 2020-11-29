@@ -1,0 +1,118 @@
+<div
+  class="is-flex is-flex-wrap-wrap is-justify-content-space-around is-align-items-center"
+>
+  <section class="hero">
+    <div class="hero-body">
+      <h1 class="title">Fiche utilisateur</h1>
+    </div>
+  </section>
+  <button (click)="goBack()" class="button is-success">Retour</button>
+</div>
+
+<div
+  *ngIf="userDetail$ | async as userDetail"
+  class="is-flex is-flex-wrap-wrap is-justify-content-space-around"
+>
+  <div class="card nootim-card">
+    <header class="card-header">
+      <div class="media">
+        <figure class="image is-128x128">
+          <img src="{{ userDetail.user.avatar }}" />
+        </figure>
+      </div>
+      <p class="card-header-title is-centered">{{ userDetail.user.name }}</p>
+    </header>
+    <div class="card-content">
+      <app-user-details-user
+        [label]="'Nom d\'utilisateur:'"
+        [value]="userDetail.user.username"
+      ></app-user-details-user>
+
+      <app-user-details-user
+        [label]="'Email:'"
+        [value]="userDetail.user.email"
+      ></app-user-details-user>
+
+      <app-user-details-user
+        [label]="'Téléphone:'"
+        [value]="userDetail.user.phone"
+      ></app-user-details-user>
+
+      <app-user-details-user
+        [label]="'Société:'"
+        [value]="userDetail.user.company.name"
+      ></app-user-details-user>
+
+      <app-user-details-user
+        [label]="'Site web:'"
+        [value]="userDetail.user.website"
+      ></app-user-details-user>
+
+      <div class="address">
+        <hr />
+        <h4>Addresse</h4>
+
+        <app-user-details-user
+          [label]="'Rue:'"
+          [value]="userDetail.user.address.street"
+        ></app-user-details-user>
+
+        <app-user-details-user
+          [label]="'Appartement:'"
+          [value]="userDetail.user.address.suite"
+        ></app-user-details-user>
+
+        <app-user-details-user
+          [label]="'Ville:'"
+          [value]="userDetail.user.address.city"
+        ></app-user-details-user>
+
+        <app-user-details-user
+          [label]="'Code zip:'"
+          [value]="userDetail.user.address.zipcode"
+        ></app-user-details-user>
+
+        <app-user-details-user
+          [label]="'Latitude:'"
+          [value]="userDetail.user.address.geo.lat"
+        ></app-user-details-user>
+
+        <app-user-details-user
+          [label]="'Longitude:'"
+          [value]="userDetail.user.address.geo.lng"
+        ></app-user-details-user>
+      </div>
+    </div>
+  </div>
+  <app-user-details-todo
+    (updateStatus)="updateStatus($event)"
+    [todos]="userDetail.todos"
+  >
+  </app-user-details-todo>
+
+  <app-user-details-post
+    (openModal)="manageModal($event)"
+    [posts]="userDetail.posts"
+  >
+  </app-user-details-post>
+</div>
+
+<!-- TODO create a component Modal post -->
+<div [class.is-active]="isOpenModal" class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <article class="message is-primary">
+      <div class="message-header">
+        {{ bodyTitle }}
+      </div>
+      <div class="message-body">
+        {{ bodyPost }}
+      </div>
+    </article>
+  </div>
+  <button
+    (click)="closeModal()"
+    class="modal-close is-large"
+    aria-label="close"
+  ></button>
+</div>
