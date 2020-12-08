@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
 
 import { Post } from '../model/post.model';
 import { environment } from '../../environments/environment';
@@ -21,8 +20,8 @@ export class PostService {
   /**
    * get all posts
    */
-  public getPosts(): Observable<Post> {
-    return this.http.get<Post>(`${this.postsUrl}`);
+  public getPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>(`${this.postsUrl}`);
   }
 
   /**
@@ -53,7 +52,7 @@ export class PostService {
    * update an existing post
    * @param post an existing object of type post
    */
-  public updateTodo(post: Post): Observable<Post> {
+  public updatePost(post: Post): Observable<Post> {
     return this.http.put<Post>(`${this.postsUrl}/${post.id}`, post);
   }
 

@@ -7,7 +7,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
-import { UsersComponent } from './components/users/users.component';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
 import { UserFooterCardComponent } from './components/user-footer-card/user-footer-card.component';
 import { TodosComponent } from './components/todos/todos.component';
@@ -19,7 +18,6 @@ import { UserDetailsUserComponent } from './components/user-details-user/user-de
   declarations: [
     AppComponent,
     HomeComponent,
-    UsersComponent,
     UserDetailsComponent,
     UserFooterCardComponent,
     TodosComponent,

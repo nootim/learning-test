@@ -10,6 +10,9 @@ import { PostService } from 'src/app/services/post.service';
 import { Todo } from 'src/app/model/todo.model';
 import { Post } from 'src/app/model/post.model';
 
+/**
+ * component with all user infos on three panels
+ */
 @Component({
   selector: 'app-user-details',
   templateUrl: './user-details.component.html',
@@ -79,9 +82,9 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
 
   /**
    * Update status of Todo completed or not
-   * @param todo Object Todo
+   * @param {Todo} todo Object Todo
    */
-  public updateStatus(todo: Todo) {
+  public updateStatus(todo: Todo): void {
    this.updateTodoSubject.next(todo);
   }
 
@@ -89,7 +92,7 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
    * Manage the content and the opended status of a modal
    * @param post (title and body of a Post)
    */
-  public manageModal(post: {title: string, body: string}) {
+  public manageModal(post: {title: string, body: string}): void {
     this.addModalContent(post);
     this.openModal();
   }
@@ -97,14 +100,14 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
   /**
    * close current opened modal
    */
-  public closeModal() {
+  public closeModal(): void {
     this.isOpenModal = false;
   }
 
   /**
    * open modal
    */
-  private openModal() {
+  private openModal(): void {
     this.isOpenModal = true;
   }
 
@@ -112,7 +115,7 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
    * Add the content for the current modal
    * @param post (title and body of Post)
    */
-  private addModalContent(post: {title: string, body: string}) {
+  private addModalContent(post: {title: string, body: string}): void {
     this.bodyPost = post.body;
     this.bodyTitle = post.title;
   }

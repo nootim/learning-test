@@ -1,3 +1,6 @@
+/**
+ * A User object identity, address, company
+ */
 export interface User {
   id?: number;
   name: string;
